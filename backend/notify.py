@@ -32,4 +32,4 @@ conn.commit()
 cur.close()
 conn.close()
 
-print(f"✅ Notifications sent: {len(tasks)}")
+print(f" Notifications sent: {len(tasks)}")

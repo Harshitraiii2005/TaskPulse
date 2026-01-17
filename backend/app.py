@@ -9,7 +9,7 @@ import psycopg2.extras
 app = Flask(__name__)
 app.secret_key = os.getenv("SECRET_KEY", "taskpulse-secret")
 
-# --- Home page / user signup ---
+
 @app.route("/", methods=["GET", "POST"])
 def index():
     if request.method == "POST":
@@ -40,7 +40,7 @@ def index():
                 conn.commit()
 
         except Exception as e:
-            print("❌ Database error on signup:", e)
+            print("Database error on signup:", e)
             return "Database error. Try again later.", 500
         finally:
             if cur:
@@ -101,7 +101,7 @@ def tasks(user_id):
         remaining_slots = max(0, 10 - len(incomplete_tasks))
 
     except Exception as e:
-        print("❌ Database error on tasks page:", e)
+        print("Database error on tasks page:", e)
         return "Database error. Try again later.", 500
     finally:
         if cur:
@@ -141,7 +141,7 @@ def complete_task(task_id):
             return redirect(url_for("tasks", user_id=user_id))
 
     except Exception as e:
-        print("❌ Database error on complete task:", e)
+        print("Database error on complete task:", e)
     finally:
         if cur:
             cur.close()

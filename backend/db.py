@@ -11,11 +11,11 @@ def get_db_connection():
         raise ValueError("DATABASE_URL environment variable is not set!")
 
     try:
-        # Connect using the URL directly (remote DB, SSL handled via URL)
+        
         conn = psycopg2.connect(DATABASE_URL, cursor_factory=RealDictCursor)
         return conn
     except psycopg2.OperationalError as e:
-        print("❌ Failed to connect to the database!")
+        print("Failed to connect to the database!")
         print("Check your DATABASE_URL and network access to Neon DB.")
         print("Error details:", e)
-        raise  # Re-raise so Flask knows something went wrong
+        raise  

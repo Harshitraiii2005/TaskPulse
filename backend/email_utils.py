@@ -6,16 +6,15 @@ from email.message import EmailMessage
 def send_completion_email(to_email, user_name, task_title):
     msg = EmailMessage()
     msg.set_content(f"""
-🎉 Congratulations {user_name}!
+ Congratulations {user_name}!
 
 You have completed:
 "{task_title}"
 
-Keep it up 🚀
+Keep it up 
 – TaskPulse
 """)
-
-    msg["Subject"] = "🎉 Task Completed - TaskPulse"
+    msg["Subject"] = "Task Completed - TaskPulse"
     msg["From"] = os.getenv("EMAIL_ADDRESS")
     msg["To"] = to_email
 

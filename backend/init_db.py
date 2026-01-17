@@ -1,6 +1,7 @@
+import os
 import psycopg2
 
-conn_string = "postgresql://neondb_owner:npg_rXlF3Y6ZHwof@ep-crimson-king-a1d904w4-pooler.ap-southeast-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require"
+conn_string = os.getenv("DATABASE_URL")
 
 conn = psycopg2.connect(conn_string)
 cur = conn.cursor()

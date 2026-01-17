@@ -62,7 +62,7 @@ def send_overdue_email(email, name, title, due_utc):
     msg.set_content(f"""
 Hi {name},
 
-⏰ Task Overdue Reminder
+ Task Overdue Reminder
 
 Task: {title}
 Due: {due_ist.strftime('%d %b %Y, %I:%M %p')} (IST)
@@ -71,7 +71,7 @@ Please complete it soon.
 
 – TaskPulse
 """)
-    msg["Subject"] = f"⏰ Overdue: {title}"
+    msg["Subject"] = f" Overdue: {title}"
     msg["From"] = EMAIL_ADDRESS
     msg["To"] = email
     _send(msg)
