@@ -3,9 +3,8 @@ kind: Ingress
 metadata:
   name: taskpulse-ingress
   namespace: taskpulse-namespace
-  annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
+  ingressClassName: nginx
   rules:
     - host: ec2-35-154-147-201.ap-south-1.compute.amazonaws.com
       http:
