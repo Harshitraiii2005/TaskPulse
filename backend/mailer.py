@@ -2,7 +2,7 @@ import os
 import smtplib
 from email.message import EmailMessage
 from dotenv import load_dotenv
-from timezone_utils import utc_to_ist
+from backend.timezone_utils import utc_to_ist
 
 load_dotenv()
 
@@ -10,9 +10,13 @@ EMAIL_ADDRESS = os.getenv("EMAIL_ADDRESS")
 EMAIL_PASSWORD = os.getenv("EMAIL_APP_PASSWORD")
 
 def _send(msg):
-    with smtplib.SMTP_SSL("smtp.gmail.com", 465) as smtp:
-        smtp.login(EMAIL_ADDRESS, EMAIL_PASSWORD)
-        smtp.send_message(msg)
+    try:
+        with smtplib.SMTP_SSL("smtp.gmail.com", 465) as smtp:
+            smtp.login(EMAIL_ADDRESS, EMAIL_PASSWORD)
+            smtp.send_message(msg)
+    except Exception as e:
+        # Log the failure but don’t crash Flask
+        print("❌ Failed to send email:", e)
 
 def send_task_created_email(email, name, title, due_ist):
     msg = EmailMessage()

@@ -1,7 +1,7 @@
 import psycopg2
 import os
 from dotenv import load_dotenv
-from mailer import send_overdue_email
+from backend.mailer import send_overdue_email
 
 load_dotenv()
 
