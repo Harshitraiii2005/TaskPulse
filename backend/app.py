@@ -17,6 +17,8 @@ def index():
         email = request.form["email"]
         gender = request.form["gender"]
 
+        conn = None
+        cur = None
         try:
             conn = get_db_connection()
             cur = conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
@@ -41,8 +43,10 @@ def index():
             print("❌ Database error on signup:", e)
             return "Database error. Try again later.", 500
         finally:
-            cur.close()
-            conn.close()
+            if cur:
+                cur.close()
+            if conn:
+                conn.close()
 
         return redirect(url_for("tasks", user_id=user_id))
 
@@ -52,6 +56,8 @@ def index():
 # --- Tasks page ---
 @app.route("/tasks/<int:user_id>", methods=["GET", "POST"])
 def tasks(user_id):
+    conn = None
+    cur = None
     try:
         conn = get_db_connection()
         cur = conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
@@ -98,8 +104,10 @@ def tasks(user_id):
         print("❌ Database error on tasks page:", e)
         return "Database error. Try again later.", 500
     finally:
-        cur.close()
-        conn.close()
+        if cur:
+            cur.close()
+        if conn:
+            conn.close()
 
     return render_template("tasks.html",
                            tasks=tasks_list,
@@ -110,6 +118,8 @@ def tasks(user_id):
 # --- Complete a task ---
 @app.route("/complete/<int:task_id>", methods=["POST"])
 def complete_task(task_id):
+    conn = None
+    cur = None
     try:
         conn = get_db_connection()
         cur = conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
@@ -133,8 +143,10 @@ def complete_task(task_id):
     except Exception as e:
         print("❌ Database error on complete task:", e)
     finally:
-        cur.close()
-        conn.close()
+        if cur:
+            cur.close()
+        if conn:
+            conn.close()
 
     return redirect(request.referrer)
 
