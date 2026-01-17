@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: taskpulse-deployment
+  namespace: taskpulse-namespace
+  annotations:
+    argocd-image-updater.argoproj.io/image-list: harshitrai20/taskpulse-app:latest
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: taskpulse-app
+  template:
+    metadata:
+      labels:
+        app: taskpulse-app
+    spec:
+      containers:
+      - name: taskpulse-container
+        image: harshitrai20/taskpulse-app:latest
+        ports:
+        - containerPort: 5000
