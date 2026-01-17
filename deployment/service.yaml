@@ -6,7 +6,7 @@ metadata:
 spec:
   selector:
     app: taskpulse-app
-  type: NodePort  # Exposes the service externally
+  type: NodePort 
   ports:
     - port: 5000        
       targetPort: 5000  
