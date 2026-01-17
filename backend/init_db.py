@@ -1,7 +1,7 @@
 import os
 import psycopg2
 
-conn_string = os.getenv("DATABASE_URL")
+conn_string = os.getenv(DATABASE_URL)
 
 conn = psycopg2.connect(conn_string)
 cur = conn.cursor()
