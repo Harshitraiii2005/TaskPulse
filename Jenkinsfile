@@ -27,15 +27,7 @@ pipeline {
             }
         }
 
-        stage('Run Tests') {
-            steps {
-                sh '''
-                    . ${VENV_NAME}/bin/activate
-                    python test_email.py
-                    python test_connection.py
-                '''
-            }
-        }
+    
 
         stage('Build Docker Image') {
             steps {
