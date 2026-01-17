@@ -4,7 +4,7 @@ pipeline {
     environment {
         VENV_NAME = 'venv'
         PYTHON_VERSION = 'python3'
-        IMAGE_NAME = 'harshitrai20/taskpulse'
+        IMAGE_NAME = 'taskpulse'
         IMAGE_TAG = 'latest'
     }
 
@@ -27,25 +27,38 @@ pipeline {
             }
         }
 
-    
-
         stage('Build Docker Image') {
             steps {
-                sh '''
-                    docker build -t ${IMAGE_NAME}:${IMAGE_TAG} .
-                '''
+                withCredentials([
+                    usernamePassword(
+                        credentialsId: 'dockerhub-creds',
+                        usernameVariable: 'DOCKER_USER',
+                        passwordVariable: 'DOCKER_PASS'
+                    )
+                ]) {
+                    sh '''
+                    docker build -t $DOCKER_USER/$IMAGE_NAME:$IMAGE_TAG .
+                    '''
+                }
             }
         }
 
-        stage('Push Docker Image'){
-                steps{
+        stage('Push Docker Image') {
+            steps {
+                withCredentials([
+                    usernamePassword(
+                        credentialsId: 'dockerhub-creds',
+                        usernameVariable: 'DOCKER_USER',
+                        passwordVariable: 'DOCKER_PASS'
+                    )
+                ]) {
                     sh '''
-                    docker tag ${IMAGE_NAME}:${IMAGE_TAG} ${IMAGE_NAME}:latest
-                    docker push ${IMAGE_NAME}:latest
-                    docker push ${IMAGE_NAME}:${IMAGE_TAG}
+                    echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
+                    docker push $DOCKER_USER/$IMAGE_NAME:$IMAGE_TAG
                     '''
                 }
-        } 
+            }
+        }
     }
 
     post {
