@@ -1,5 +1,6 @@
 
 # TaskPulse – 3-Tier Task Management Application
+#visit: http://ec2-35-154-147-201.ap-south-1.compute.amazonaws.com/tasks/1
 
 [![Python](https://img.shields.io/badge/Python-3.10+-blue?logo=python&logoColor=white)](https://www.python.org/) 
 [![Flask](https://img.shields.io/badge/Flask-2.3-lightgrey?logo=flask)](https://flask.palletsprojects.com/) 
@@ -21,7 +22,7 @@
 - **Backend:** Python Flask APIs.
 - **Database:** Neon (serverless PostgreSQL).
 - **Notifications:** Email alerts on task creation and due dates.
-- **Deployment:** Dockerized with Kubernetes, CI/CD via Jenkins & ArgoCD, hosted on Railway.
+- **Deployment:** Dockerized with Kubernetes, CI/CD via Jenkins & ArgoCD, hosted on EC2.
 
 **Key Features:**
 
