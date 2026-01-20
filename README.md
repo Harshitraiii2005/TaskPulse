@@ -1,6 +1,7 @@
 
 # TaskPulse – 3-Tier Task Management Application
-#visit: https://taskpulse-production-0489.up.railway.app/
+#visit: 👉 http://ec2-35-154-147-201.ap-south-1.compute.amazonaws.com/
+
 
 [![Python](https://img.shields.io/badge/Python-3.10+-blue?logo=python&logoColor=white)](https://www.python.org/) 
 [![Flask](https://img.shields.io/badge/Flask-2.3-lightgrey?logo=flask)](https://flask.palletsprojects.com/) 
